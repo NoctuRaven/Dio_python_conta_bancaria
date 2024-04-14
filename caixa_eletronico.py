@@ -9,7 +9,8 @@ class Conta_Bancaria():
         
     def add_value(self,valor):
         try:
-            if float(valor)>0:
+            valor = float(valor)
+            if valor>0:
                 self.valor += valor
                 self.extrato.append("{:.2f}".format(valor))
                 print(f"R${valor} adicionado a conta")
@@ -39,6 +40,7 @@ class Conta_Bancaria():
     
     def withdraw_value(self,valor):
         try:
+            valor = float(valor)
             if valor<0:
                 raise
             if self.check_withdraw()<3:
@@ -62,15 +64,39 @@ class Conta_Bancaria():
 
 nova_conta = Conta_Bancaria(nome="Pessoa",cpf="123456789",valor=0.00)
 
-nova_conta.add_value(30)
-nova_conta.add_value(-30)
-nova_conta.withdraw_value(10)
-nova_conta.add_value(700)
-nova_conta.withdraw_value(600)
-nova_conta.add_value("aaa")
-nova_conta.withdraw_value(10000)
-nova_conta.withdraw_value(-10000)
-nova_conta.withdraw_value(10)
-nova_conta.withdraw_value(10)
-nova_conta.withdraw_value(10)
-nova_conta.show_extract()
+class Caixa_Eletronico:
+    def __init__(self):
+        pass
+    def interface():
+        print(f"Bem vindo {nova_conta.nome}")
+        stay_in_loop = True
+        while stay_in_loop:
+            opcao = input(f"""Escolha uma das opções: 
+                        a) Saque
+                        b) Deposito
+                        c) Extrato
+                        d) sair
+                        
+                        """)
+            if opcao=="a":
+                saque = input("Digite o valor que deseja sacar")
+                nova_conta.withdraw_value(saque)
+                res = input("Deseja fazer outra operação? s/n ")
+                stay_in_loop = res=="s"
+            elif opcao=="b":
+                deposito = input("Digite o valor do deposito")
+                nova_conta.add_value(deposito)
+                res = input("Deseja fazer outra operação? s/n ")
+                stay_in_loop = res=="s"
+            elif opcao=="c":
+                nova_conta.show_extract()
+                res = input("Deseja fazer outra operação? s/n ")
+                stay_in_loop = res=="s"
+            else:
+                stay_in_loop = False
+
+caixa_1 = Caixa_Eletronico
+
+caixa_1.interface()
+        
+        
